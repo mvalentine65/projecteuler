@@ -18,15 +18,15 @@ def is_prime(target: int, primes: list[int]) -> bool:
 def get_next_prime(num: int, primes: list[int]) -> int:
     while not is_prime(num, primes):
         num += 2
-    primes.append(num)
+    primes.append(num)      
     return num
 
 
 def largest_prime_factor(num: int=600851475143) -> int:
+    
     divisor = 3
     limit = floor(sqrt(num)) + 1
     primes = [2,3]
-    last = -1
     while divisor < limit:
         while num % divisor == 0:
             last = divisor
