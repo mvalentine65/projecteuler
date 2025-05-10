@@ -1,14 +1,38 @@
+from math import gcd
 from typing import Generator
 from typing import Iterator
 from typing import Optional
-"""
-A palindromic number reads the same both ways. The largest palindrome made from the product of two -digit numbers is
 
-.
+def is_prime(target: int, primes: list[int]) -> bool:
+    for prime in primes:
+        if target % prime == 0:
+            return False
+    return True
 
-Find the largest palindrome made from the product of two 3
--digit numbers.
-"""
+
+def get_next_prime(num: int, primes: list[int]) -> int:
+    while not is_prime(num, primes):
+        num += 2
+    primes.append(num)      
+    return num
+
+def factor_until_odd(num:int) -> int:
+    factor = 2
+    while num & 1 == 0:
+        num // 2
+    return num
+    
+
+def largest_prime_factor(num: int) -> int:
+    num = factor_until_odd(num)
+    factor = 3
+    while factor * factor <= num:
+        if num % factor == 0:
+            num //= factor
+        else:
+            factor += 2
+    return num
+
 
 def six_digit_palindromes() -> Generator[str, None, None]:
     for num in range(997, 99, -1):
@@ -38,17 +62,9 @@ def check_three_digit_factors(string: str) -> Optional[tuple[int, int]]:
 def check_palindromes(iterable: Iterator[int]) -> Optional[int]:
     for int_string in iterable:
         if x := check_three_digit_factors(int_string):
-            print(int_string)
             return x
     return None
 
 
-def main():
-    answer = check_palindromes(six_digit_palindromes())
-    if answer is None:
-        answer = check_palindromes(five_digit_palindromes())
-    print(answer)
-
-
-if __name__ == "__main__":
-    main()
+def least_common_multiple(a: int, b:int) -> int:
+    return a*b // (gcd(a, b))
