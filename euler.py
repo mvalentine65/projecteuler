@@ -16,7 +16,10 @@ def main() -> None:
         2: zero_ten.two,
         3: zero_ten.three,
         4: zero_ten.four,
-        5: zero_ten.five
+        5: zero_ten.five,
+        6: zero_ten.six,
+        7: zero_ten.seven,
+        8: zero_ten.eight,
     }
     question = exercises[args.exercise]
     if args.argument == None:

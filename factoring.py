@@ -16,6 +16,7 @@ def get_next_prime(num: int, primes: list[int]) -> int:
     primes.append(num)      
     return num
 
+
 def factor_until_odd(num:int) -> int:
     factor = 2
     while num & 1 == 0:
