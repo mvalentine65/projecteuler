@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-import zero_ten
+import one_ten
 
 
 def main() -> None:
@@ -12,14 +12,16 @@ def main() -> None:
     args = parser.parse_args()
 
     exercises = {
-        1: zero_ten.one,
-        2: zero_ten.two,
-        3: zero_ten.three,
-        4: zero_ten.four,
-        5: zero_ten.five,
-        6: zero_ten.six,
-        7: zero_ten.seven,
-        8: zero_ten.eight,
+        1: one_ten.one,
+        2: one_ten.two,
+        3: one_ten.three,
+        4: one_ten.four,
+        5: one_ten.five,
+        6: one_ten.six,
+        7: one_ten.seven,
+        8: one_ten.eight,
+        9: one_ten.nine,
+        10: one_ten.ten,
     }
     question = exercises[args.exercise]
     if args.argument == None:

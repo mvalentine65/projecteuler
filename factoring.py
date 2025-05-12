@@ -1,10 +1,13 @@
-from math import gcd
+from math import floor, gcd, sqrt
 from typing import Generator
 from typing import Iterator
 from typing import Optional
 
 def is_prime(target: int, primes: list[int]) -> bool:
+    limit = floor(sqrt(target))
     for prime in primes:
+        if prime > limit:
+            break
         if target % prime == 0:
             return False
     return True
@@ -24,15 +27,22 @@ def factor_until_odd(num:int) -> int:
     return num
     
 
-def largest_prime_factor(num: int) -> int:
+def find_prime_factors(num: int) -> list[int]:
+    if num & 1:
+        primes = [2]
+    else:
+        primes = []
     num = factor_until_odd(num)
     factor = 3
     while factor * factor <= num:
         if num % factor == 0:
+            primes.append(factor)
             num //= factor
         else:
             factor += 2
-    return num
+    if primes:
+        primes.append(num)
+    return primes
 
 
 def six_digit_palindromes() -> Generator[str, None, None]:

@@ -3,9 +3,10 @@ from functools import reduce
 from factoring import five_digit_palindromes
 from factoring import six_digit_palindromes
 from factoring import check_palindromes
-from factoring import largest_prime_factor
+from factoring import find_prime_factors
 from factoring import least_common_multiple
 from factoring import get_next_prime
+from geometry.int_shapes import triple_equal_to_target
 from math import prod
 
 def one(limit: int = 1000) -> int:
@@ -43,7 +44,7 @@ def two(limit: int = 4000000) -> int:
 
 
 def three(num: int = 600851475143 ) -> int:
-    return largest_prime_factor(num)
+    return find_prime_factors(num)[-1]
 
 
 def four(sink=None) -> int:
@@ -109,7 +110,15 @@ def eight(length = 13) -> int:
     return max_prod
 
 
+def nine(target_sum: int = 1000) -> int:
+    return prod(triple_equal_to_target(target_sum))
 
-
-
-
+def ten(limit: int = 2*10**6) -> int:
+    if limit < 2:
+        return 0
+    if limit == 2:
+        return 2
+    primes = [2,3]
+    while primes[-1] < limit:
+        get_next_prime(primes[-1]+2, primes)
+    return sum(primes[:-1])
