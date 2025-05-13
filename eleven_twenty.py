@@ -1,4 +1,7 @@
 from math import prod
+from typing import Generator
+
+from factoring import count_divisors
 
 
 class GridSearch:
@@ -14,7 +17,7 @@ class GridSearch:
 
     def horizontal_search(self, length: int = 4) -> int:
         max_seen = 0
-        for y, row in enumerate(self.grid):
+        for row in self.grid:
             # the end of the range is the end of another range
             # this means it's got two excluded values
             # increment by one to avoid off by one error
@@ -78,7 +81,20 @@ def eleven() -> int:
     # flatten
     # need to iterate multiple times, so array instead of generator
     g = GridSearch(grid)
-    # horizontal = g.horizontal_search(4)
-    # vertical = g.vertical_search(4)
-    # diagnol = g.diagnol_search(4)
     return GridSearch(grid).search()
+
+
+def triangle_numbers() -> Generator[int, None, None]:
+    state = 1
+    total = 1
+    while True:
+        yield total
+        state += 1
+        total += state
+
+
+def twelve(num_divisors: int = 500) -> int:
+    for num in triangle_numbers():
+        if count_divisors(num) >= num_divisors:
+            return num
+    return -1

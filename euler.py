@@ -26,6 +26,7 @@ def main() -> None:
         9: one_ten.nine,
         10: one_ten.ten,
         11: eleven_twenty.eleven,
+        12: eleven_twenty.twelve,
     }
 
     question = exercises[args.exercise]

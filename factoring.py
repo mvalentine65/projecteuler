@@ -80,3 +80,27 @@ def check_palindromes(iterable: Iterator[str]) -> Optional[tuple[int, int]]:
 
 def least_common_multiple(a: int, b: int) -> int:
     return a * b // (gcd(a, b))
+
+
+def find_next_divisor(num: int) -> Generator[int, None, None]:
+    state = 1
+    while state < num:
+        if num % state == 0:
+            yield state
+        state += 1
+    yield num
+
+
+def count_divisors(num: int) -> int:
+    limit = floor(sqrt(num)) + 1
+    if num & 1:
+        start = 3
+        step = 2
+    else:
+        start = 2
+        step = 1
+    count = 2
+    for divisor in range(start, limit, step):
+        if num % divisor == 0:
+            count += 2
+    return count
