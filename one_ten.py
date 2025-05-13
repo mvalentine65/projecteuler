@@ -1,4 +1,3 @@
-
 from functools import reduce
 from factoring import five_digit_palindromes
 from factoring import six_digit_palindromes
@@ -9,12 +8,14 @@ from factoring import get_next_prime
 from geometry.int_shapes import triple_equal_to_target
 from math import prod
 
+
 def one(limit: int = 1000) -> int:
     total = 0
     for i in range(3, limit):
         if i % 3 == 0 or i % 5 == 0:
             total += i
     return total
+
 
 def two(limit: int = 4000000) -> int:
     """
@@ -43,7 +44,7 @@ def two(limit: int = 4000000) -> int:
     return total
 
 
-def three(num: int = 600851475143 ) -> int:
+def three(num: int = 600851475143) -> int:
     return find_prime_factors(num)[-1]
 
 
@@ -56,8 +57,8 @@ def four(sink=None) -> int:
     return prod(factor_tup)
 
 
-def five(highest: int=20) -> int:
-    return reduce(least_common_multiple, range(1,highest+1))
+def five(highest: int = 20) -> int:
+    return reduce(least_common_multiple, range(1, highest + 1))
 
 
 def six(highest: int = 100) -> int:
@@ -65,20 +66,20 @@ def six(highest: int = 100) -> int:
     sum(range(1,n)) == (1+n) / (n/2)
     sum(x*x for x in range(1, n)) == n(n+1)(2n+1)/6
     """
-    squared_then_summed = highest*(highest+1)*(2*highest+1)//6
-    summed_then_squared = int(((1+highest) * (highest/2))**2)
+    squared_then_summed = highest * (highest + 1) * (2 * highest + 1) // 6
+    summed_then_squared = int(((1 + highest) * (highest / 2)) ** 2)
     return summed_then_squared - squared_then_summed
 
 
-def seven(nth: int=10001) -> int:
+def seven(nth: int = 10001) -> int:
     primes = [2, 3, 5, 7, 11, 13]
     while len(primes) < nth:
-        get_next_prime(primes[-1]+2, primes)
-    return primes[nth-1]
+        get_next_prime(primes[-1] + 2, primes)
+    return primes[nth - 1]
 
 
-def eight(length = 13) -> int:
-    num ="""73167176531330624919225119674426574742355349194934
+def eight(length=13) -> int:
+    num = """73167176531330624919225119674426574742355349194934
             96983520312774506326239578318016984801869478851843
             85861560789112949495459501737958331952853208805511
             12540698747158523863050715693290963295227443043557
@@ -99,26 +100,30 @@ def eight(length = 13) -> int:
             05886116467109405077541002256983155200055935729725
             71636269561882670428252483600823257530420752963450"""
     max_prod = 0
-    strings =[string for string in num.split("0") if len(string) >= length]
+    strings = [string for string in num.split("0") if len(string) >= length]
     for digit_sting in strings:
         nums = [int(char) for char in digit_sting if char.isdigit()]
         current = prod(nums[0:length])
         max_prod = max(current, max_prod)
         for i, digit in enumerate(nums[:-length]):
-            current  = current // digit * nums[i+length]
+            current = current // digit * nums[i + length]
             max_prod = max(current, max_prod)
     return max_prod
 
 
 def nine(target_sum: int = 1000) -> int:
-    return prod(triple_equal_to_target(target_sum))
+    if result := triple_equal_to_target(target_sum):
+        return prod(result)
+    else:
+        return -1
 
-def ten(limit: int = 2*10**6) -> int:
+
+def ten(limit: int = 2 * 10**6) -> int:
     if limit < 2:
         return 0
     if limit == 2:
         return 2
-    primes = [2,3]
+    primes = [2, 3]
     while primes[-1] < limit:
-        get_next_prime(primes[-1]+2, primes)
+        get_next_prime(primes[-1] + 2, primes)
     return sum(primes[:-1])

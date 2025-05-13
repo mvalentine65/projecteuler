@@ -3,6 +3,7 @@ from typing import Generator
 from typing import Iterator
 from typing import Optional
 
+
 def is_prime(target: int, primes: list[int]) -> bool:
     limit = floor(sqrt(target))
     for prime in primes:
@@ -16,16 +17,16 @@ def is_prime(target: int, primes: list[int]) -> bool:
 def get_next_prime(num: int, primes: list[int]) -> int:
     while not is_prime(num, primes):
         num += 2
-    primes.append(num)      
+    primes.append(num)
     return num
 
 
-def factor_until_odd(num:int) -> int:
+def factor_until_odd(num: int) -> int:
     factor = 2
     while num & 1 == 0:
         num // 2
     return num
-    
+
 
 def find_prime_factors(num: int) -> list[int]:
     if num & 1:
@@ -70,12 +71,12 @@ def check_three_digit_factors(string: str) -> Optional[tuple[int, int]]:
     return None
 
 
-def check_palindromes(iterable: Iterator[int]) -> Optional[int]:
+def check_palindromes(iterable: Iterator[str]) -> Optional[tuple[int, int]]:
     for int_string in iterable:
         if x := check_three_digit_factors(int_string):
             return x
     return None
 
 
-def least_common_multiple(a: int, b:int) -> int:
-    return a*b // (gcd(a, b))
+def least_common_multiple(a: int, b: int) -> int:
+    return a * b // (gcd(a, b))
