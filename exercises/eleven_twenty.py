@@ -12,7 +12,7 @@ class GridSearch:
         self.string = grid
         self.grid = [
             [int(x) for x in line.strip().split()] for line in grid.splitlines()
-        ]
+        ]   
         self.height = len(self.grid)
 
         self.width = len(self.grid[0])
