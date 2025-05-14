@@ -1,10 +1,10 @@
 from functools import reduce
-from factoring import five_digit_palindromes
-from factoring import six_digit_palindromes
-from factoring import check_palindromes
-from factoring import find_prime_factors
-from factoring import least_common_multiple
-from factoring import get_next_prime
+from numbers.factoring import five_digit_palindromes
+from numbers.factoring import six_digit_palindromes
+from numbers.factoring import check_palindromes
+from numbers.factoring import find_prime_factors
+from numbers.factoring import least_common_multiple
+from numbers.factoring import get_next_prime
 from geometry.int_shapes import triple_equal_to_target
 from math import prod
 

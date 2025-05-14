@@ -1,8 +1,8 @@
 from argparse import ArgumentParser
 from collections.abc import Callable
 from typing import Dict
-import one_ten
-import eleven_twenty
+from exercises import one_ten
+from exercises import eleven_twenty
 
 
 def main() -> None:
@@ -27,6 +27,7 @@ def main() -> None:
         10: one_ten.ten,
         11: eleven_twenty.eleven,
         12: eleven_twenty.twelve,
+        13: eleven_twenty.thirteen,
     }
 
     question = exercises[args.exercise]
