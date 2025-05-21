@@ -14,7 +14,7 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    exercises: Dict[int, Callable[..., int]] = {
+    exercises: Dict[int, Callable[..., int | str]] = {
         1: one_ten.one,
         2: one_ten.two,
         3: one_ten.three,
@@ -28,6 +28,10 @@ def main() -> None:
         11: eleven_twenty.eleven,
         12: eleven_twenty.twelve,
         13: eleven_twenty.thirteen,
+        14: eleven_twenty.fourteen,
+        15: eleven_twenty.fifteen,
+        16: eleven_twenty.sixteen,
+        17: eleven_twenty.seventeen,
     }
 
     question = exercises[args.exercise]

@@ -1,8 +1,11 @@
 from math import prod
 from operator import add
 
+from geometry.int_shapes import basic_find_paths
 from numbers.big_num import BigNum
+from numbers.generic import count_letters_in_written_num
 from numbers.series import triangle_numbers
+from numbers.series import collatz_step_memoizer
 from numbers.factoring import count_divisors
 
 
@@ -12,7 +15,7 @@ class GridSearch:
         self.string = grid
         self.grid = [
             [int(x) for x in line.strip().split()] for line in grid.splitlines()
-        ]   
+        ]
         self.height = len(self.grid)
 
         self.width = len(self.grid[0])
@@ -86,13 +89,12 @@ def eleven() -> int:
     return GridSearch(grid).search()
 
 
-
-
 def twelve(num_divisors: int = 500) -> int:
     for num in triangle_numbers():
         if count_divisors(num) >= num_divisors:
             return num
     return -1
+
 
 def thirteen() -> str:
     numbers = """37107287533902102798797998220837590246510135740250
@@ -200,3 +202,44 @@ def thirteen() -> str:
     for num in nums[1:]:
         result = result + num
     return str(result)[0:10]
+
+
+def fourteen(limit: int = 1 * 10**6) -> int:
+    """
+    Return longest Collatz sequence for a number under limit.
+    """
+    collatzer = collatz_step_memoizer()
+    return max(((collatzer(num), num) for num in range(1, limit)))[1]
+
+
+def fifteen(n: int = 20) -> int:
+    """
+    Find the total number of possible paths in a square
+    grid with sides of length n. Assumes no weights or barriers.
+    """
+    return basic_find_paths(n, n)
+
+
+def sixteen(nth_term: int = 1000) -> int:
+    """
+    Find 2 to the nth power and then sum the individual digits
+    """
+    num = BigNum("1")
+    for _ in range(nth_term):
+        num = num * 2
+    print(f"power digit: {num}")
+    return sum(num.digits)
+
+
+def seventeen(end: int = 1000) -> int:
+    """
+    For each number in range [1,end] inclusive, convert to a written form (1 == "one").
+    Count the letters in each written form and return the sum of all counts.
+    """
+    count = 0
+    for num in range(1, end + 1):
+        current = count_letters_in_written_num(num)
+        count += current
+        print(num, current)
+    print("final count is", count)
+    return sum(count_letters_in_written_num(num) for num in range(1, end + 1))

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from enum import Enum
+from math import comb
 from math import sqrt
 from typing import Optional
 
@@ -60,3 +61,23 @@ def triple_equal_to_target(target: int = 1000) -> Optional[tuple[int, int, int]]
                 if a * a + b * b == c * c:
                     return a, b, c
     return None
+
+
+def basic_find_paths(y: int = 20, x: int = 20) -> int:
+    """
+    Find the number of paths in a grid with given dimensions.
+    Assumes no weights and a uniform matrix.
+    """
+    # if the grid is a square, use the closed form
+    if y == x:
+        return comb(2 * x, x)
+    # in [[0] * cols] * rows, the * operators copies references
+    # this will create `rows` copies of the same list and create errors
+    # iterators avoid the alias problem
+    # initialize as 1 to satisfy the base case for each square
+    m, n = x + 1, y + 1
+    dp = [[1] * (m) for _ in range(n)]
+    for i in range(1, m):
+        for j in range(1, n):
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+    return dp[y][x]
