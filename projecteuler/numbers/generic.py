@@ -1,5 +1,3 @@
-from typing import Optional
-
 ones: list[str] = [
     "",
     "one",
@@ -79,7 +77,7 @@ def written_form(_num: int) -> str:
     if _num < 0:
         output.append("negative")
         _num = 0 - _num
-    num: list[str] = list(str(num)[::-1])
+    num: list[str] = list(str(_num)[::-1])
     needs_and = False
     while num:
         digit = int(num.pop())
@@ -122,3 +120,19 @@ def count_letters_in_written_num(num: int) -> int:
     Returns an int representing the final count
     """
     return sum(1 if letter not in ["-", " "] else 0 for letter in written_form(num))
+
+
+def sum_max_path_in_triangle(blob: str) -> int:
+    """
+    Given a triangle of numbers shaped liked Pascal's Triangle,
+    find the maximum path using a bottom up approach.
+    """
+    rows = [[int(num) for num in line.strip().split()] for line in blob.splitlines()][
+        ::-1
+    ]
+    for y, row in enumerate(rows[1:-1], 1):
+        previous = rows[y - 1]
+        for x, col in enumerate(row):
+            row[x] = col + max(previous[x], previous[x + 1])
+    rows[-1][0] = rows[-1][0] + max(rows[-2])
+    return rows[-1][0]

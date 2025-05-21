@@ -32,6 +32,7 @@ def main() -> None:
         15: eleven_twenty.fifteen,
         16: eleven_twenty.sixteen,
         17: eleven_twenty.seventeen,
+        18: eleven_twenty.eighteen,
     }
 
     question = exercises[args.exercise]
