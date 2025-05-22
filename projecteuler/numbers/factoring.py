@@ -1,4 +1,4 @@
-from math import floor, gcd, sqrt
+from math import floor, gcd, sqrt, ceil
 from typing import Generator
 from typing import Iterator
 from typing import Optional
@@ -104,3 +104,26 @@ def count_divisors(num: int) -> int:
         if num % divisor == 0:
             count += 2
     return count
+
+
+def find_divisors(num: int=10000) -> list[int]:
+    if num < 1:
+        return []
+    if num == 1:
+        return [1]
+    limit = floor(sqrt(num)) + 1
+    lower, higher = [1], []
+    for divisor in range(2, limit):
+        if num % divisor == 0:
+            f1, f2 = divisor, num // divisor
+            lower.append(f1)
+            if f1 != f2:
+                higher.append(f2)
+    output = lower + higher
+    output.sort()
+    return output
+
+
+def get_abundant_numbers(limit: int = 28123) -> list[int]:
+    print(find_divisors(12))
+    return [num for num in range(1, limit+1) if sum(find_divisors(num)) > num]
