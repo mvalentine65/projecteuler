@@ -3,6 +3,7 @@ from collections.abc import Callable
 from typing import Dict
 from exercises import one_ten
 from exercises import eleven_twenty
+from exercises import twentyone_thirty
 
 
 def main() -> None:
@@ -33,6 +34,11 @@ def main() -> None:
         16: eleven_twenty.sixteen,
         17: eleven_twenty.seventeen,
         18: eleven_twenty.eighteen,
+        19: eleven_twenty.nineteen,
+        20: eleven_twenty.twenty,
+        21: twentyone_thirty.twentyone,
+        22: twentyone_thirty.twentytwo,
+        23: twentyone_thirty.twentythree,
     }
 
     question = exercises[args.exercise]
