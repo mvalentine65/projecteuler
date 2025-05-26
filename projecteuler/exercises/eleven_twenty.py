@@ -3,6 +3,9 @@ from operator import add
 
 from geometry.int_shapes import basic_find_paths
 from numbers.big_num import BigNum
+from numbers.dates import Days
+from numbers.dates import Months
+from numbers.dates import zeller_congruence
 from numbers.generic import count_letters_in_written_num
 from numbers.generic import sum_max_path_in_triangle
 from numbers.series import triangle_numbers
@@ -264,14 +267,23 @@ def eighteen(test: int = 0) -> int:
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
     return sum_max_path_in_triangle(blob)
 
-def nineteen(year:int = 2000) -> int:
+def nineteen(last_year:int = 2000) -> int:
     """
     Starting at Jan 1, 1900 and ending at Dec 31 of the given year,
     find the number of months that begin on a Sunday. Return the number
     as an int.
     """
-
-    return NotImplemented
+    count = 0
+    for year in range(1901, last_year+1):
+        for month in Months:
+            y = year
+            m = month.value
+            if m <= 2:
+                m += 12
+                y -= 1
+            if zeller_congruence(1, m, y) == Days.SUNDAY:
+                count += 1
+    return count
 
 def twenty(num: int = 100) -> int:
     """
