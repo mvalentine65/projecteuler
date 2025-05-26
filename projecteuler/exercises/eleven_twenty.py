@@ -280,4 +280,4 @@ def twenty(num: int = 100) -> int:
     acc = BigNum("1")
     for num in range(1, num+1):
         acc = acc * num
-    return sum(acc.digits)
+    return sum(acc)

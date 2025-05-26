@@ -1,6 +1,6 @@
 from __future__ import annotations
 from itertools import zip_longest
-
+from typing import Iterable
 
 class BigNum:
 
@@ -94,3 +94,6 @@ class BigNum:
 
     def __len__(self) -> int:
         return len(self.digits)
+
+    def __iter__(self) -> Iterable[int]:
+        return iter(self.digits)
