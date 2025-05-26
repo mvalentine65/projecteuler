@@ -263,3 +263,21 @@ def eighteen(test: int = 0) -> int:
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
     return sum_max_path_in_triangle(blob)
+
+def nineteen(year:int = 2000) -> int:
+    """
+    Starting at Jan 1, 1900 and ending at Dec 31 of the given year,
+    find the number of months that begin on a Sunday. Return the number
+    as an int.
+    """
+
+    return NotImplemented
+
+def twenty(num: int = 100) -> int:
+    """
+    Find the value of num! and return the sum of the digits in that sum.
+    """
+    acc = BigNum("1")
+    for num in range(1, num+1):
+        acc = acc * num
+    return sum(acc.digits)
