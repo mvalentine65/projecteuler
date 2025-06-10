@@ -2,6 +2,7 @@ from math import factorial
 from numbers.generic import decimal_cycle_length
 from numbers.factoring import find_divisors
 from numbers.factoring import get_abundant_numbers
+from numbers.factoring import get_next_prime
 from numbers.series import fib_stepper
 from pathlib import Path
 from itertools import combinations_with_replacement
@@ -98,3 +99,51 @@ def twentysix(limit: int = 1000) -> int:
         (denominator for denominator in range(1, limit + 1)),
         key=lambda num: decimal_cycle_length(1, num),
     )
+
+
+def twentyseven(limit: int = 1000) -> int:
+    """
+    Given the  quardratic formula  n^2 + an + b, find the version which
+    produces the longest run of consecutive intergers. The absolute values
+    of a and b can range from 0 to limit, inclusive. n must have an initial
+    value of 0.
+    """
+    primes = [2, 3, 5]
+    while primes[-1] <= 3 * limit**2:
+        print(primes[-1])
+        get_next_prime(primes[-1] + 2, primes)
+    get_index = {prime: i for i, prime in enumerate(primes)}
+
+    def count_consecutive(a: int, b: int) -> int:
+        """
+        Given constraints, iterate over values of n until a non-prime
+        number is detected.
+        """
+        if b not in get_index:
+            return 0
+        count = 1
+        quadratic = lambda n: n**2 + a * n + b
+        current = b
+        n = 1
+        index = get_index[b]
+        while current in get_index:
+            current = quadratic(n)
+            count += 1
+            index += 1
+            n += 1
+        return count
+
+    max_count = (0, (0, 0))
+    for b in primes:
+        print(f"new b {b}")
+        if b > limit:
+            break
+        for a in range(limit + 1):
+            variants = (
+                (count_consecutive(a, b), (a, b)),
+                (count_consecutive(-a, b), (-a, b)),
+                (count_consecutive(a, -b), (a, -b)),
+                (count_consecutive(-a, -b), (-a, -b)),
+            )
+            max_count = max(max_count, max(variants))
+    return max_count[1][0] * max_count[1][1]
