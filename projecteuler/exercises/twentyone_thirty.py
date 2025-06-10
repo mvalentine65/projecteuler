@@ -1,8 +1,13 @@
+from math import factorial
+from numbers.generic import decimal_cycle_length
 from numbers.factoring import find_divisors
 from numbers.factoring import get_abundant_numbers
+from numbers.series import fib_stepper
 from pathlib import Path
 from itertools import combinations_with_replacement
-def twentyone(num:int=10000) -> int:
+
+
+def twentyone(num: int = 10000) -> int:
     """
     Finds divisors of all numbers in range [1, num).
     For all starting nums n and sums d, if f(n) = d and f(d) = n,
@@ -20,6 +25,7 @@ def twentyone(num:int=10000) -> int:
             total += n
     return total
 
+
 def twentytwo(sink: int = 0) -> int:
     """
     Reads the names out of file 0022_names.txt and sorts them.
@@ -29,9 +35,9 @@ def twentytwo(sink: int = 0) -> int:
     scores as an int.
     """
     ASCII_OFFSET = 64
-    file_path = Path('data', '0022_names.txt')
+    file_path = Path("data", "0022_names.txt")
     with open(file_path) as f:
-        names = [line.strip() for line in f.read().split(',')]
+        names = [line.strip() for line in f.read().split(",")]
     names.sort()
     total = 0
     for i, name in enumerate(names, 1):
@@ -41,12 +47,54 @@ def twentytwo(sink: int = 0) -> int:
         total += score
     return total
 
+
 def twentythree(limit: int = 28123) -> int:
     """
     Find the sum of all the positive integers which cannot be written as the
     sum of two abundant numbers.
     """
     abundant_numbers = get_abundant_numbers(limit)
-    sums_of_abundant_pairs = {n1 + n2 for n1, n2 in combinations_with_replacement(abundant_numbers,2)}
-    return sum(num for num in range(1,limit+1) if
-               num not in sums_of_abundant_pairs)
+    sums_of_abundant_pairs = {
+        n1 + n2 for n1, n2 in combinations_with_replacement(abundant_numbers, 2)
+    }
+    return sum(num for num in range(1, limit + 1) if num not in sums_of_abundant_pairs)
+
+
+def twentyfour(nth: int = 1000000) -> str:
+    """
+    Returns the nth lexographic permutation of a 10 digit string
+    made out of the numbers 0 through 9.
+    """
+    numbers = [str(num) for num in range(10)]
+    nth -= 1
+    permutation = factorial(len(numbers) - 1)
+    result = []
+    for i in range(len(numbers) - 1, -1, -1):
+        index = nth // permutation
+        result.append(numbers.pop(index))
+        nth %= permutation
+        if i:
+            permutation //= i
+    return "".join(result)
+
+
+def twentyfive(digits: int = 1000) -> int:
+    fibber = fib_stepper()
+    num = fibber()
+    index = 1
+    while len(num) < digits:
+        index += 1
+        num = fibber()
+    return index
+
+
+def twentysix(limit: int = 1000) -> int:
+    """
+    For every number between 1 and limit inclusive, makes a fraction 1 / number
+    and finds the decimal representation with the longest repeating cycle.
+    Returns the denominator with the longest cycle.
+    """
+    return max(
+        (denominator for denominator in range(1, limit + 1)),
+        key=lambda num: decimal_cycle_length(1, num),
+    )

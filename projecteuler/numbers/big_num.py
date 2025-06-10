@@ -2,6 +2,7 @@ from __future__ import annotations
 from itertools import zip_longest
 from typing import Iterable
 
+
 class BigNum:
 
     def __init__(self, num: str | list[int]):

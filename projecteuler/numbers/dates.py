@@ -6,6 +6,7 @@ class Days(Enum):
     """
     1 indexed enum for the days of the week.
     """
+
     MONDAY = 1
     TUESDAY = 2
     WEDNESDAY = 3
@@ -24,10 +25,12 @@ class Days(Enum):
             return Days.SUNDAY
         return Days(num)
 
+
 class Months(Enum):
     """
     1 indexed enum for the month of the year.
     """
+
     JANUARY = 1
     FEBRUARY = 2
     MARCH = 3
@@ -50,6 +53,12 @@ MONTHS_IN_YEAR = 12
 def zeller_congruence(day: int, month: int, year: int) -> Days:
     of_century = year % 100
     century = year // 100
-    zellner_num = (day + ((13 * (month+1)) // 5) + of_century + 
-        (of_century // 4) + (century // 4) + 5 * century) % 7
+    zellner_num = (
+        day
+        + ((13 * (month + 1)) // 5)
+        + of_century
+        + (of_century // 4)
+        + (century // 4)
+        + 5 * century
+    ) % 7
     return Days.from_zeller_num(zellner_num)

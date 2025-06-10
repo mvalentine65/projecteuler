@@ -1,6 +1,7 @@
 import unittest
 from numbers.generic import written_form
 from numbers.generic import count_letters_in_written_num
+from numbers.generic import decimal_cycle_length
 
 
 class TestNumToWord(unittest.TestCase):
@@ -49,3 +50,25 @@ class TestCountLettersInWrittenForm(unittest.TestCase):
 
     def test_999_has_24_letters(self):
         self.assertEqual(count_letters_in_written_num(999), 24)
+
+
+class TestDecimalCycleLength(unittest.TestCase):
+
+    def test_no_cycle_identity(self):
+        self.assertEqual(decimal_cycle_length(1, 1), 0)
+
+    def test_no_cycle_one_eigth(self):
+        self.assertEqual(decimal_cycle_length(1, 8), 0)
+
+    def test_cycle_one_third(self):
+        self.assertEqual(decimal_cycle_length(1, 3), 1)
+
+    def test_cycle_after_non_repeating_digit(self):
+        self.assertEqual(decimal_cycle_length(1, 6), 1)
+
+    def test_cycle_zeros_invloved_983(self):
+        self.assertEqual(decimal_cycle_length(1, 983), 982)
+
+
+if __name__ == "__main__":
+    unittest.main()

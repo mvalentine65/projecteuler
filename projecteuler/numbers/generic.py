@@ -136,3 +136,17 @@ def sum_max_path_in_triangle(blob: str) -> int:
             row[x] = col + max(previous[x], previous[x + 1])
     rows[-1][0] = rows[-1][0] + max(rows[-2])
     return rows[-1][0]
+
+
+def decimal_cycle_length(numeritor: int, denominator: int) -> int:
+    memory: dict[int, int] = {}
+    index = 0
+    while numeritor > 0:
+        index += 1
+        if numeritor in memory:
+            return index - memory[numeritor]
+        memory[numeritor] = index
+        if numeritor >= denominator:
+            numeritor = numeritor % denominator
+        numeritor = numeritor * 10
+    return 0

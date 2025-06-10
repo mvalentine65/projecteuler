@@ -1,4 +1,5 @@
 from typing import Callable, Generator
+from numbers.big_num import BigNum
 
 
 def triangle_numbers() -> Generator[int, None, None]:
@@ -35,3 +36,15 @@ def collatz_step_memoizer() -> Callable[[int], int]:
         return memo[num]
 
     return collatz_stepper
+
+
+def fib_stepper() -> Callable[[], BigNum]:
+    state = [BigNum("1"), BigNum("0")]
+
+    def fib_generator() -> BigNum:
+        temp = state[1]
+        state[1] += state[0]
+        state[0] = temp + BigNum("0")
+        return state[1]
+
+    return fib_generator

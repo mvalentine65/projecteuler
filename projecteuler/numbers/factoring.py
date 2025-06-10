@@ -106,7 +106,7 @@ def count_divisors(num: int) -> int:
     return count
 
 
-def find_divisors(num: int=10000) -> list[int]:
+def find_divisors(num: int = 10000) -> list[int]:
     if num < 1:
         return []
     if num == 1:
@@ -126,4 +126,4 @@ def find_divisors(num: int=10000) -> list[int]:
 
 def get_abundant_numbers(limit: int = 28123) -> list[int]:
     print(find_divisors(12))
-    return [num for num in range(1, limit+1) if sum(find_divisors(num)) > num]
+    return [num for num in range(1, limit + 1) if sum(find_divisors(num)) > num]

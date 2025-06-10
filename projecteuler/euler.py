@@ -39,6 +39,9 @@ def main() -> None:
         21: twentyone_thirty.twentyone,
         22: twentyone_thirty.twentytwo,
         23: twentyone_thirty.twentythree,
+        24: twentyone_thirty.twentyfour,
+        25: twentyone_thirty.twentyfive,
+        26: twentyone_thirty.twentysix,
     }
 
     question = exercises[args.exercise]
